@@ -236,7 +236,7 @@ export const mutations = {
     state.authUser = authUser
   }
 }
-/* 
+/*
 export const actions = {
   async nuxtServerInit({ commit }) {
     const res = await this.$axios.get("/api/current_user")

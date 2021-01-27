@@ -12,18 +12,30 @@
 <script>
 import VmProducts from '../Products';
 import { getByTitle } from '@/assets/filters';
+import axios from 'axios'
 
 export default {
   name: 'productsList',
-  
+
   components: { VmProducts },
-  
+
   data () {
     return {
       id: '',
       noProductLabel: 'No product found',
-      productsFiltered: []
+      productsFiltered: [],
+      productsJSON: []
     };
+  },
+
+  mounted () {
+    axios
+      .get('http://localhost:8081/api/product/')
+      .then(response => {
+        console.log(response)
+        console.log(response.data.products)
+        this.productsJSON =  response.data.products
+      })
   },
 
   computed: {
@@ -31,17 +43,16 @@ export default {
       if (this.$store.state.userInfo.hasSearched) {
         return this.getProductByTitle();
       } else {
-        return this.$store.state.products;
+          return this.productsJSON;
       }
     }
   },
 
   methods: {
     getProductByTitle () {
-      let listOfProducts = this.$store.state.products,
+      let listOfProducts = this.productsJSON,
           titleSearched = this.$store.state.userInfo.productTitleSearched;
-      
-      return this.productsFiltered = getByTitle(listOfProducts, titleSearched);
+          return this.productsFiltered = getByTitle(listOfProducts, titleSearched);
     }
   }
 
