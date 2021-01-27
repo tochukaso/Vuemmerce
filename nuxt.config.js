@@ -1,6 +1,9 @@
 const pkg = require('./package')
 
 module.exports = {
+  env: {
+    GOVUE_API_BASE: process.env.GOVUE_API_BASE || 'http://localhost:8081/api/product/'
+  },
 
   router: {
     base: process.env.GOVUE_BASE || '/'
@@ -10,9 +13,6 @@ module.exports = {
   */
   head: {
     title: pkg.description,
-    base: [
-      {href: process.env.BASE_URL || 'http://localhost:3001' }
-    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

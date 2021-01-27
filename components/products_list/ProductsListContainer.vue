@@ -30,7 +30,7 @@ export default {
 
   mounted () {
     axios
-      .get('http://localhost:8081/api/product/')
+      .get(process.env.GOVUE_API_BASE + "/product/")
       .then(response => {
         console.log(response)
         console.log(response.data.products)
