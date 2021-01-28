@@ -1,14 +1,5 @@
 export const state = () => ({
   products: [],
-  mounted () {
-    axios
-      .get(process.env.GOVUE_API_BASE + "/product/")
-      .then(response => {
-        console.log(response)
-        console.log(response.data.products)
-        this.productsJSON =  response.data.products
-      })
-  },
   userInfo: {
     isLoggedIn: false,
     isSignedUp: false,
