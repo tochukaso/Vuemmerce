@@ -1,89 +1,92 @@
 <template>
-  <div class="section">
-    <div class="card is-clearfix columns">
-        <figure class="card-image is-480x480 column is-one-thirds">
-          <img src="https://bulma.io/images/placeholders/480x480.png">
-        </figure>
-        <div class="card-content column is-two-thirds">
-          <div class="card-content__title">
-            <h2 class="title is-4">{{ product.title }}
-              <button class="button is-small" :title="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.id)">
-                <span class="icon is-small">
-                  <i class="fa fa-heart"></i>
-                </span>
-              </button>
-              <button class="button is-small" :title="addToFavouriteLabel" v-show="!product.isFavourite" @click="saveToFavorite(product.id)">
-                <span class="icon is-small">
-                  <i class="fa fa-heart-o"></i>
-                </span>
-              </button>
-            </h2>
-          </div>
-          <div class="card-content__text">
-            <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            Ut enim ad minim veniam, quis nostrud
-            </p>
-          </div>
-          <div class="card-content__ratings" v-if="product.rating === 1">
-            <i class="fa fa-star"></i>
-          </div>
-          <div class="card-content__ratings" v-else-if="product.rating === 2">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <div class="card-content__ratings" v-else-if="product.rating === 3">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <div class="card-content__ratings" v-else-if="product.rating === 4">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <div class="card-content__ratings" v-else-if="product.rating === 5">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <div class="card-content__reviews">
-            <div class="is-pulled-left">
-              <p><strong>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</strong></p>
+  <div>
+    <VmHero></VmHero>
+    <div class="section">
+      <div class="card is-clearfix columns">
+          <figure class="card-image is-480x480 column is-one-thirds">
+            <img :src="product.imagePath" onerror="this.src='https://bulma.io/images/placeholders/480x480.png'" :alt="product.title" >
+          </figure>
+          <div class="card-content column is-two-thirds">
+            <div class="card-content__title">
+              <h2 class="title is-4">{{ product.title }}
+                <button class="button is-small" :title="removeFromFavouriteLabel" v-show="product.isFavourite" @click="removeFromFavourite(product.id)">
+                  <span class="icon is-small">
+                    <i class="fa fa-heart"></i>
+                  </span>
+                </button>
+                <button class="button is-small" :title="addToFavouriteLabel" v-show="!product.isFavourite" @click="saveToFavorite(product.id)">
+                  <span class="icon is-small">
+                    <i class="fa fa-heart-o"></i>
+                  </span>
+                </button>
+              </h2>
             </div>
-            <div class="select is-rounded is-small is-pulled-right">
-              <select @change="onSelectQuantity(product.id)" v-model="selected">
-                <option v-for="quantity in quantityArray" :value="quantity">{{ quantity }}</option>
-              </select>
+            <div class="card-content__text">
+              <p>
+                {{product.description}}
+              </p>
             </div>
-          </div>
-          <div class="card-content__price is-pulled-left">
-            <span class="title is-3"><strong>{{ product.price }}&euro;</strong></span>
-          </div>
-          <div class="card-content__btn is-pulled-right">
-            <button class="button is-primary" v-if="!isAddedBtn" @click="addToCart(product.id)">{{ addToCartLabel }}</button>
-            <button class="button is-text" v-if="isAddedBtn" @click="removeFromCart(product.id)">{{ removeFromCartLabel }}</button>
-          </div>
+            <div class="card-content__ratings" v-if="product.rating === 1">
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="card-content__ratings" v-else-if="product.rating === 2">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="card-content__ratings" v-else-if="product.rating === 3">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="card-content__ratings" v-else-if="product.rating === 4">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="card-content__ratings" v-else-if="product.rating === 5">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+            </div>
+            <div class="card-content__reviews">
+              <div class="is-pulled-left">
+                <p><strong>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</strong></p>
+              </div>
+              <div class="select is-rounded is-small is-pulled-right">
+                <select @change="onSelectQuantity(product.id)" v-model="selected">
+                  <option v-for="quantity in quantityArray" :value="quantity">{{ quantity }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="card-content__price is-pulled-left">
+              <span class="title is-3"><strong>{{ product.price }}&yen;</strong></span>
+            </div>
+            <div class="card-content__btn is-pulled-right">
+              <button class="button is-primary" v-if="!isAddedBtn" @click="addToCart(product.id)">{{ addToCartLabel }}</button>
+              <button class="button is-text" v-if="isAddedBtn" @click="removeFromCart(product.id)">{{ removeFromCartLabel }}</button>
+            </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import VmHero from '@/components/hero/Hero';
 export default {
   name: 'product_detail-id',
 
   validate ({ params }) {
     return /^\d+$/.test(params.id)
   },
-  
+
   data () {
     return {
-      addToCartLabel: 'Add to cart',
-      removeFromCartLabel: 'Remove from cart',
+      addToCartLabel: 'カートに商品を追加する',
+      removeFromCartLabel: 'カートから商品を削除する',
       addToFavouriteLabel: 'Add to favourite',
       removeFromFavouriteLabel: 'Remove from favourite',
       product: {},

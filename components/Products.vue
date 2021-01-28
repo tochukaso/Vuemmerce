@@ -2,7 +2,7 @@
   <div>
     <div class="card-image">
       <figure class="image is-4by3">
-        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+        <img :src="product.imagePath" onerror="this.src='https://bulma.io/images/placeholders/1280x960.png'" :alt="product.title" >
       </figure>
     </div>
     <div class="card-content">
@@ -41,10 +41,10 @@
           <i v-if="product.ratings === 5" class="fa fa-star"></i>
           <i v-if="product.ratings === 5" class="fa fa-star"></i>
           <i v-if="product.ratings === 5" class="fa fa-star"></i>
-          <p>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'No reviews' }}</p>
+          <p>{{ product.reviews > 0 ? `${product.reviews} Reviews` : 'レビューはありません' }}</p>
         </div>
         <p class="is-pulled-right">
-          <span class="title is-4"><strong>&euro; {{ product.price }}</strong></span>
+          <span class="title is-4"><strong>&yen; {{ product.price }}</strong></span>
         </p>
       </div>
       <div class="card-footer btn-actions">
@@ -71,7 +71,8 @@
           price: product.price,
           rating: product.ratings,
           reviews: product.reviews,
-          isAddedBtn: product.isAddedBtn
+          isAddedBtn: product.isAddedBtn,
+          imagePath: product.imagePath
         }
       }"
     >
@@ -86,9 +87,9 @@ export default {
 
   data () {
     return {
-      addToCartLabel: 'Add to cart',
+      addToCartLabel: 'カートに商品を追加する',
       viewDetailsLabel: 'Details',
-      removeFromCartLabel: 'Remove from cart',
+      removeFromCartLabel: 'カートから商品を削除する',
       addToFavouriteLabel: 'Add to favourite',
       removeFromFavouriteLabel: 'Remove from favourite',
       selected: 1,

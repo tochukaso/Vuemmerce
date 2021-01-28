@@ -10,8 +10,8 @@
 				<div v-if="!isCheckoutSection">
 					<div class="box" v-for="product in products" :key="product.id">
 						<button class="is-pulled-right button is-info is-inverted" @click="removeFromCart(product.id)">{{ removeLabel }}</button>
-						<p>{{ product.title }}  {{ product.quantity > 0 ?  ` - Quantity: ${product.quantity}` : ''}}</p>
-						<p>{{ product.price }} &euro;</p>
+						<p>{{ product.title }}  {{ product.quantity > 0 ?  ` - 数量: ${product.quantity}` : ''}}</p>
+						<p>{{ product.price }} &yen;</p>
 					</div>
 					<div v-if="products.length === 0">
 						<p>{{ cartEmptyLabel }}</p>
@@ -32,12 +32,12 @@
 <script>
 export default {
 	name: 'checkout',
-    
+
 	data () {
 		return {
-			modalTitle: 'Checkout',
-			removeLabel: 'Remove from cart',
-			cartEmptyLabel: 'Your cart is empty',
+			modalTitle: 'カート',
+			removeLabel: 'カートから商品を削除する',
+			cartEmptyLabel: 'カートには商品が入っていません',
 			closeLabel: 'Close',
 			isCheckoutSection: false
 		}
@@ -62,23 +62,25 @@ export default {
 						finalPrice = '',
 						quantity = 1;
 
+        let allTotalCount = 0;
 				productsAdded.forEach(product => {
 
 					if (product.quantity >= 1) {
-						quantity = product.quantity;
+            quantity = product.quantity;
+            allTotalCount += quantity
 					}
 
 					pricesArray.push((product.price * quantity)); // get the price of every product added and multiply quantity
 				});
 
 				finalPrice = pricesArray.reduce((a, b) => a + b, 0); // sum the prices
-				
+
 				if (totalProducts > 1) { // set plural or singular
 					productLabel = 'products';
 				} else {
 					productLabel = 'product';
 				}
-				return `Buy ${totalProducts} ${productLabel} at ${finalPrice}€`;
+				return `${allTotalCount}個の商品を${finalPrice}円で購入する`;
 		},
 		isUserLoggedIn () {
 			return this.$store.getters.isUserLoggedIn;

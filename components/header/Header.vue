@@ -29,16 +29,6 @@
           </div>
         </div>
       </div>
-
-      <!-- For mobile and tablet -->
-      <div v-show="isMenuOpen" class="navbar-end">
-        <VmMenu></VmMenu>
-      </div>
-
-      <!-- For desktop -->
-      <div class="navbar-end is-hidden-mobile">
-        <VmMenu></VmMenu>
-      </div>
     </nav>
   </div>
 </template>
@@ -82,7 +72,7 @@
 
 <style lang="scss" scoped>
   .title {
-    background: url('../../static/vuemmerce-logo.png') no-repeat;
+    background: url('../../static/ECS3.png') no-repeat;
     background-position: 50% 50%;
     background-size: 165px;
     width: 175px;

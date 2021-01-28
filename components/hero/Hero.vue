@@ -1,12 +1,12 @@
 <template>
-  <div class="hero is-medium is-bold">
+  <div class="hero is-small is-bold">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
-          Free ecommerce template for Vue.js projects
+          Vue.jsを利用したECサイトのサンプルサイトです
         </h1>
         <h2 class="subtitle">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+          <a href="https://github.com/ivanlori/Vuemmerce">Vuemmerce</a>をforkして作成しています
         </h2>
       </div>
     </div>

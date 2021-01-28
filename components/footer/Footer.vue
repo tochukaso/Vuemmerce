@@ -1,11 +1,7 @@
 <template>
   <div class="footer">
-    <div class="columns container">
-      <div class="column">
-        <p>Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet.</p>
-      </div>
-    <div class="column has-text-right">
-      <p>Vuemmerce | Made with ❤</p>
+    <div class="column is-small has-text-right">
+      <p>Using Vuemmerce | Thanks ❤</p>
     </div>
     </div>
   </div>
